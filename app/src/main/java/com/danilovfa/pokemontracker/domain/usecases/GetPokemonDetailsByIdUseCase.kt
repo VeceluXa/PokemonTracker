@@ -1,19 +1,13 @@
 package com.danilovfa.pokemontracker.domain.usecases
 
-import android.graphics.Bitmap
-import android.graphics.Picture
 import com.danilovfa.pokemontracker.domain.models.PokemonDetails
 import com.danilovfa.pokemontracker.domain.models.PokemonItem
+import com.danilovfa.pokemontracker.domain.repository.IPokemonDetailsRepository
 
-class GetPokemonDetailsByIdUseCase {
+class GetPokemonDetailsByIdUseCase(private val pokemonDetailsRepository: IPokemonDetailsRepository) {
     fun execute(pokemonItem: PokemonItem) : PokemonDetails {
         // TODO Add implementation
-        return PokemonDetails(
-            name = "bulbasaur",
-            sprite = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888),
-            types = listOf("grass"),
-            weightInKg = 15.0,
-            heightInCm = 50.0
-        )
+        // TODO Get page local. If null get from api.
+        return pokemonDetailsRepository.getDetailsCached(pokemonItem)
     }
 }
