@@ -10,13 +10,32 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import androidx.room.Room
 import com.danilovfa.pokemontracker.R
+import com.danilovfa.pokemontracker.data.local.database.PokemonDetailsDatabase
+import com.danilovfa.pokemontracker.data.local.database.PokemonPageDatabase
 import com.danilovfa.pokemontracker.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+    private val dbPage by lazy {
+        Room.databaseBuilder(
+            applicationContext,
+            PokemonPageDatabase::class.java,
+            "pokemons.db"
+        ).build()
+    }
+//    val pageDao = dbPage.pokemonPageDao
+    private val dbDetails by lazy {
+        Room.databaseBuilder(
+            applicationContext,
+            PokemonDetailsDatabase::class.java,
+            "details.db"
+        ).build()
+    }
+//    val detailsDao = dbDetails.pokemonDetailsDao
 
     override fun onCreate(savedInstanceState: Bundle?) {
         WindowCompat.setDecorFitsSystemWindows(window, false)

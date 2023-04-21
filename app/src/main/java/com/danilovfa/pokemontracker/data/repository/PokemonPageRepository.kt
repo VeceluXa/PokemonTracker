@@ -12,7 +12,7 @@ class PokemonPageRepository(private val pokemonsPageAPI: PokemonsPageAPI, privat
         // TODO Add implementation
         // TODO Get cached items. If not cached get from API
         val list = mutableListOf<PokemonItem>()
-        dao.getPage()?.forEach { list.add(it.toDomain()) }
+        dao.getPage().forEach { list.add(it.toDomain()) }
         return list
     }
 }

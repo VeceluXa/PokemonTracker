@@ -7,7 +7,7 @@ import com.danilovfa.pokemontracker.data.local.model.PokemonItemEntity
 
 @Database(
     entities = [PokemonItemEntity::class],
-    version = 1
+    version = 2
 )
 abstract class PokemonPageDatabase : RoomDatabase() {
     abstract val pokemonPageDao: PokemonPageDao
