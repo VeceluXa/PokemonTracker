@@ -5,9 +5,7 @@ import com.danilovfa.pokemontracker.domain.model.PokemonItem
 import com.danilovfa.pokemontracker.domain.repository.IPokemonDetailsRepository
 
 class GetPokemonDetailsByIdUseCase(private val pokemonDetailsRepository: IPokemonDetailsRepository) {
-    fun execute(pokemonItem: PokemonItem) : PokemonDetails {
-        // TODO Add implementation
-        // TODO Get page local. If null get from api.
-        return pokemonDetailsRepository.getDetailsCached(pokemonItem)
+    suspend fun execute(pokemonItem: PokemonItem) : PokemonDetails {
+        return pokemonDetailsRepository.getDetails(pokemonItem)
     }
 }

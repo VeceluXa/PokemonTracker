@@ -4,6 +4,5 @@ import com.danilovfa.pokemontracker.domain.model.PokemonDetails
 import com.danilovfa.pokemontracker.domain.model.PokemonItem
 
 interface IPokemonDetailsRepository {
-    fun getDetailsApi(pokemonItem: PokemonItem) : PokemonDetails
-    fun getDetailsCached(pokemonItem: PokemonItem) : PokemonDetails
+    suspend fun getDetails(pokemonItem: PokemonItem) : PokemonDetails
 }
