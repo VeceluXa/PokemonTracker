@@ -3,26 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/PageFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.danilovfa.pokemontracker.ui.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        android:id="@+id/PageFragment"
+        android:name="com.danilovfa.pokemontracker.ui.PageFragment"
+        android:label="@string/page_fragment_label"
+        tools:layout="@layout/fragment_page">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/action_PageFragment_to_DetailsFragment"
+            app:destination="@id/DetailsFragment" />
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.danilovfa.pokemontracker.ui.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
+        android:id="@+id/DetailsFragment"
+        android:name="com.danilovfa.pokemontracker.ui.DetailsFragment"
+        android:label="@string/details_fragment_label"
+        tools:layout="@layout/fragment_details">
 
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/action_DetailsFragment_to_PageFragment"
+            app:destination="@id/PageFragment" />
     </fragment>
 </navigation>
