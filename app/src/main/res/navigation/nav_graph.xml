@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/PageFragment"
-        android:name="com.danilovfa.pokemontracker.ui.PageFragment"
+        android:name="com.danilovfa.pokemontracker.presentation.view.PageFragment"
         android:label="@string/page_fragment_label"
         tools:layout="@layout/fragment_page">
 
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/DetailsFragment"
-        android:name="com.danilovfa.pokemontracker.ui.DetailsFragment"
+        android:name="com.danilovfa.pokemontracker.presentation.view.DetailsFragment"
         android:label="@string/details_fragment_label"
         tools:layout="@layout/fragment_details">
 
