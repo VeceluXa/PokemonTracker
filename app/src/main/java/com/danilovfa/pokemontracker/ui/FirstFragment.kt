@@ -1,4 +1,4 @@
-package com.danilovfa.pokemontracker
+package com.danilovfa.pokemontracker.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.danilovfa.pokemontracker.R
 import com.danilovfa.pokemontracker.databinding.FragmentFirstBinding
 
 /**
