@@ -1,6 +1,6 @@
 package com.danilovfa.pokemontracker.data.repository
 
-import com.danilovfa.pokemontracker.domain.models.PokemonItem
+import com.danilovfa.pokemontracker.domain.model.PokemonItem
 import com.danilovfa.pokemontracker.domain.repository.IPokemonsPageRepository
 
 class PokemonPageRepository : IPokemonsPageRepository {

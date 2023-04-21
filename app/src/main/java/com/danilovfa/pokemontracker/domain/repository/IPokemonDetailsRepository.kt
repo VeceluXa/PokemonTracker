@@ -1,7 +1,7 @@
 package com.danilovfa.pokemontracker.domain.repository
 
-import com.danilovfa.pokemontracker.domain.models.PokemonDetails
-import com.danilovfa.pokemontracker.domain.models.PokemonItem
+import com.danilovfa.pokemontracker.domain.model.PokemonDetails
+import com.danilovfa.pokemontracker.domain.model.PokemonItem
 
 interface IPokemonDetailsRepository {
     fun getDetailsApi(pokemonItem: PokemonItem) : PokemonDetails

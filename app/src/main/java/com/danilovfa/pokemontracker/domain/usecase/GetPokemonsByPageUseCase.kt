@@ -1,6 +1,6 @@
-package com.danilovfa.pokemontracker.domain.usecases
+package com.danilovfa.pokemontracker.domain.usecase
 
-import com.danilovfa.pokemontracker.domain.models.PokemonItem
+import com.danilovfa.pokemontracker.domain.model.PokemonItem
 import com.danilovfa.pokemontracker.domain.repository.IPokemonsPageRepository
 
 class GetPokemonsByPageUseCase(private val pokemonsPageRepository: IPokemonsPageRepository) {

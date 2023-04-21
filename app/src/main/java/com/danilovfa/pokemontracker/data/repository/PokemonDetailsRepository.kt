@@ -1,8 +1,8 @@
 package com.danilovfa.pokemontracker.data.repository
 
 import android.graphics.Bitmap
-import com.danilovfa.pokemontracker.domain.models.PokemonDetails
-import com.danilovfa.pokemontracker.domain.models.PokemonItem
+import com.danilovfa.pokemontracker.domain.model.PokemonDetails
+import com.danilovfa.pokemontracker.domain.model.PokemonItem
 import com.danilovfa.pokemontracker.domain.repository.IPokemonDetailsRepository
 
 class PokemonDetailsRepository : IPokemonDetailsRepository {

@@ -1,4 +1,4 @@
-package com.danilovfa.pokemontracker.domain.models
+package com.danilovfa.pokemontracker.domain.model
 
 import android.graphics.Bitmap
 
