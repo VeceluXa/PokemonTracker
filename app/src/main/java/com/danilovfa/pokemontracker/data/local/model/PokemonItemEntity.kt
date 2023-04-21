@@ -4,11 +4,11 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.danilovfa.pokemontracker.domain.model.PokemonItem
 
-@Entity
+@Entity(tableName = "pokemons")
 data class PokemonItemEntity(
-    val name: String,
-    @PrimaryKey
-    val id: Int
+    val name: String = "",
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0
 ) {
     fun toDomain() : PokemonItem {
         return PokemonItem(name, id)
