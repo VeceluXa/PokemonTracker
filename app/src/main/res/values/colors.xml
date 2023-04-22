@@ -2,5 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFAFAFA</color>
-    <color name="dark_blue">#FF325155</color>
+    <color name="blue">#FF325155</color>
+    <color name="dark_blue">#FF1E3133</color>
+    <color name="grey">#FFC3C3C3</color>
 </resources>
