@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Pokemon Tracker</string>
-    <string name="page_fragment_label">Pokemons</string>
-    <string name="details_fragment_label">Details</string>
+    <string name="page_label">Pokemons</string>
     <string name="pokemonNameDummy">Bulbasaur</string>
 </resources>

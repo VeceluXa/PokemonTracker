@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/lato_black"
-        android:text="Pokemons"
+        android:text="@string/page_label"
         android:textColor="@color/dark_blue"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
