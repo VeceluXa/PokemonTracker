@@ -1,6 +1,6 @@
 package com.danilovfa.pokemontracker.data.remote.response
 
-data class AbilityX(
+data class SpeciesDto(
     val name: String,
     val url: String
 )

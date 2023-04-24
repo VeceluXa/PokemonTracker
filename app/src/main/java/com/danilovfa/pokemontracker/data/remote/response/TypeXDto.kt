@@ -1,6 +1,6 @@
 package com.danilovfa.pokemontracker.data.remote.response
 
-data class StatX(
+data class TypeXDto(
     val name: String,
     val url: String
 )

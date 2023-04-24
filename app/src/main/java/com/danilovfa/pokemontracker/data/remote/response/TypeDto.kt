@@ -1,6 +1,6 @@
 package com.danilovfa.pokemontracker.data.remote.response
 
-data class Type(
+data class TypeDto(
     val slot: Int,
-    val type: TypeX
+    val type: TypeXDto
 )

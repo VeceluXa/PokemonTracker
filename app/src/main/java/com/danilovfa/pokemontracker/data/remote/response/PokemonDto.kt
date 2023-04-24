@@ -1,6 +1,6 @@
 package com.danilovfa.pokemontracker.data.remote.response
 
-data class Form(
+data class PokemonDto(
     val name: String,
     val url: String
 )

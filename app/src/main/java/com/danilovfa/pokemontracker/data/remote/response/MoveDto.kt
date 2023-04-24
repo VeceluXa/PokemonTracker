@@ -1,5 +1,5 @@
 package com.danilovfa.pokemontracker.data.remote.response
 
-data class Move(
-    val move: MoveX,
+data class MoveDto(
+    val move: MoveXDto,
 )

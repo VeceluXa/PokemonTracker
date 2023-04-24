@@ -2,7 +2,7 @@ package com.danilovfa.pokemontracker.data.remote.response
 
 import com.google.gson.annotations.SerializedName
 
-data class Sprites(
+data class SpritesDto(
     @SerializedName("back_default")
     val backDefault: String,
     @SerializedName("back_female")

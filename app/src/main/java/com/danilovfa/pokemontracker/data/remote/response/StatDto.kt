@@ -2,9 +2,9 @@ package com.danilovfa.pokemontracker.data.remote.response
 
 import com.google.gson.annotations.SerializedName
 
-data class Stat(
+data class StatDto(
     @SerializedName("base_stat")
     val baseStat: Int,
     val effort: Int,
-    val stat: StatX
+    val stat: StatXDto
 )
