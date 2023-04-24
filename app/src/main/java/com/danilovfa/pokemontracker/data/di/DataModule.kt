@@ -48,11 +48,23 @@ class DataModule {
 
     @Provides
     @Singleton
+    fun providePokemonPageDao(db: PokemonPageDatabase) : PokemonPageDao {
+        return db.pokemonPageDao
+    }
+
+    @Provides
+    @Singleton
     fun providePokemonDetailsDatabase(app: Application) : PokemonDetailsDatabase {
         return Room.databaseBuilder(
             app,
             PokemonDetailsDatabase::class.java,
             PokemonDetailsDatabase.DATABASE_NAME
         ).build()
+    }
+
+    @Provides
+    @Singleton
+    fun providePokemonDetailsDao(db: PokemonDetailsDatabase) : PokemonDetailsDao {
+        return db.pokemonDetailsDao
     }
 }

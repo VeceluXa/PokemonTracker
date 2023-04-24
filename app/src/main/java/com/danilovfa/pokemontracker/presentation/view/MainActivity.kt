@@ -13,8 +13,9 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.danilovfa.pokemontracker.R
 import com.danilovfa.pokemontracker.databinding.ActivityMainBinding
 import dagger.hilt.EntryPoint
+import dagger.hilt.android.AndroidEntryPoint
 
-@EntryPoint
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
