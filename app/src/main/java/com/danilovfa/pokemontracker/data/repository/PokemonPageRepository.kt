@@ -4,12 +4,16 @@ import com.danilovfa.pokemontracker.data.local.dao.PokemonPageDao
 import com.danilovfa.pokemontracker.data.remote.PokemonPageAPI
 import com.danilovfa.pokemontracker.domain.model.PokemonItem
 import com.danilovfa.pokemontracker.domain.repository.IPokemonPageRepository
+import com.danilovfa.pokemontracker.utils.PAGE_SIZE
 import javax.inject.Inject
 
 class PokemonPageRepository @Inject constructor(
     private val pokemonsPageAPI: PokemonPageAPI,
     private val dao: PokemonPageDao
 ) : IPokemonPageRepository {
+    // Offset for paging
+    var offset = 0
+
     override suspend fun getPage(): List<PokemonItem> {
         // TODO Add implementation
         // TODO Get cached items. If not cached get from API
