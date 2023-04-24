@@ -12,7 +12,9 @@ import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.danilovfa.pokemontracker.R
 import com.danilovfa.pokemontracker.databinding.ActivityMainBinding
+import dagger.hilt.EntryPoint
 
+@EntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration

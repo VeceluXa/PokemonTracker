@@ -11,4 +11,8 @@ import com.danilovfa.pokemontracker.data.local.model.PokemonItemEntity
 )
 abstract class PokemonPageDatabase : RoomDatabase() {
     abstract val pokemonPageDao: PokemonPageDao
+
+    companion object {
+        const val DATABASE_NAME = "pokemons"
+    }
 }
