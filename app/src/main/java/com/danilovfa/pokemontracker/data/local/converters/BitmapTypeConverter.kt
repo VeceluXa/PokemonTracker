@@ -9,7 +9,7 @@ class BitmapTypeConverter {
     @TypeConverter
     fun fromBitmap(bitmap: Bitmap): ByteArray {
         val outputStream = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+        bitmap.compress(Bitmap.CompressFormat.PNG, 80, outputStream)
         return outputStream.toByteArray()
     }
 
