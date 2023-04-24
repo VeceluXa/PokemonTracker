@@ -4,7 +4,6 @@ import com.danilovfa.pokemontracker.data.local.dao.PokemonPageDao
 import com.danilovfa.pokemontracker.data.remote.PokemonPageAPI
 import com.danilovfa.pokemontracker.domain.model.PokemonItem
 import com.danilovfa.pokemontracker.domain.repository.IPokemonPageRepository
-import com.danilovfa.pokemontracker.utils.PAGE_SIZE
 import javax.inject.Inject
 
 class PokemonPageRepository @Inject constructor(

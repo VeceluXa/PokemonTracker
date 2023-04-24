@@ -1,7 +1,6 @@
 package com.danilovfa.pokemontracker.data.di
 
 import android.app.Application
-import android.content.Context
 import androidx.room.Room
 import com.danilovfa.pokemontracker.data.local.dao.PokemonDetailsDao
 import com.danilovfa.pokemontracker.data.local.dao.PokemonPageDao
@@ -13,8 +12,7 @@ import com.danilovfa.pokemontracker.data.repository.PokemonDetailsRepository
 import com.danilovfa.pokemontracker.data.repository.PokemonPageRepository
 import com.danilovfa.pokemontracker.domain.repository.IPokemonDetailsRepository
 import com.danilovfa.pokemontracker.domain.repository.IPokemonPageRepository
-import com.danilovfa.pokemontracker.presentation.App
-import com.danilovfa.pokemontracker.utils.BASE_URL
+import com.danilovfa.pokemontracker.utils.Constants.Companion.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
