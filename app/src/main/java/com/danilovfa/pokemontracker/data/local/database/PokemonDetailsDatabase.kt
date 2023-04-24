@@ -15,4 +15,8 @@ import com.danilovfa.pokemontracker.data.local.model.PokemonDetailsEntity
 @TypeConverters(StringTypeConverter::class, BitmapTypeConverter::class)
 abstract class PokemonDetailsDatabase : RoomDatabase() {
     abstract val pokemonDetailsDao: PokemonDetailsDao
+
+    companion object {
+        const val DATABASE_NAME = "details"
+    }
 }
