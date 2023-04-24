@@ -1,7 +1,6 @@
 package com.danilovfa.pokemontracker.data.di
 
 import android.app.Application
-import android.content.Context
 import androidx.room.Room
 import com.danilovfa.pokemontracker.data.local.dao.PokemonDetailsDao
 import com.danilovfa.pokemontracker.data.local.dao.PokemonPageDao
@@ -13,11 +12,13 @@ import com.danilovfa.pokemontracker.data.repository.PokemonDetailsRepository
 import com.danilovfa.pokemontracker.data.repository.PokemonPageRepository
 import com.danilovfa.pokemontracker.domain.repository.IPokemonDetailsRepository
 import com.danilovfa.pokemontracker.domain.repository.IPokemonPageRepository
-import com.danilovfa.pokemontracker.presentation.App
+import com.danilovfa.pokemontracker.utils.Constants.Companion.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module
@@ -67,4 +68,19 @@ class DataModule {
     fun providePokemonDetailsDao(db: PokemonDetailsDatabase) : PokemonDetailsDao {
         return db.pokemonDetailsDao
     }
+
+    @Provides
+    @Singleton
+    fun provideRetrofit() : Retrofit = Retrofit.Builder()
+        .baseUrl(BASE_URL)
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
+
+    @Provides
+    @Singleton
+    fun providePokemonDetailsAPI(retrofit: Retrofit): PokemonDetailsAPI = retrofit.create(PokemonDetailsAPI::class.java)
+
+    @Provides
+    @Singleton
+    fun providePokemonPageAPI(retrofit: Retrofit): PokemonPageAPI = retrofit.create(PokemonPageAPI::class.java)
 }

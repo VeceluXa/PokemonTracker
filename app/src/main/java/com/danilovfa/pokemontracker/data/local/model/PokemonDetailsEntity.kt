@@ -10,18 +10,8 @@ data class PokemonDetailsEntity(
     val name: String,
     val sprite: Bitmap,
     val types: List<String>,
-    val weightInKg: Double,
-    val heightInCm: Double,
+    val weightInKg: Int,
+    val heightInCm: Int,
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0
-) {
-    fun toDomain() : PokemonDetails {
-        return PokemonDetails(
-            name = name,
-            sprite = sprite,
-            types = types,
-            weightInKg = weightInKg,
-            heightInCm = heightInCm
-        )
-    }
-}
+)

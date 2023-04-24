@@ -9,8 +9,4 @@ data class PokemonItemEntity(
     val name: String = "",
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0
-) {
-    fun toDomain() : PokemonItem {
-        return PokemonItem(name, id)
-    }
-}
+)

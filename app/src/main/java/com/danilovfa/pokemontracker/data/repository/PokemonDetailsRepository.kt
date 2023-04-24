@@ -14,6 +14,6 @@ class PokemonDetailsRepository @Inject constructor(
     override suspend fun getDetails(pokemonItem: PokemonItem): PokemonDetails {
         // TODO Add implementation
         // TODO Get cached items. If not cached get from API
-        return dao.getDetailsById(0)?.toDomain() ?: detailsAPI.get()
+        return dao.getDetailsById(0)!!.toDomain()
     }
 }
