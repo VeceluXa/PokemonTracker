@@ -1,6 +1,7 @@
 package com.danilovfa.pokemontracker.data.di
 
 import android.app.Application
+import android.content.Context
 import androidx.room.Room
 import com.danilovfa.pokemontracker.data.local.dao.PokemonDetailsDao
 import com.danilovfa.pokemontracker.data.local.dao.PokemonPageDao
@@ -16,6 +17,7 @@ import com.danilovfa.pokemontracker.utils.Constants.Companion.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -27,8 +29,11 @@ class DataModule {
 
     @Provides
     @Singleton
-    fun providePokemonDetailsRepository(detailsAPI: PokemonDetailsAPI, dao: PokemonDetailsDao): IPokemonDetailsRepository {
-        return PokemonDetailsRepository(detailsAPI, dao)
+    fun providePokemonDetailsRepository(
+        detailsAPI: PokemonDetailsAPI,
+        dao: PokemonDetailsDao,
+        @ApplicationContext appContext: Context): IPokemonDetailsRepository {
+        return PokemonDetailsRepository(detailsAPI, dao, appContext)
     }
 
     @Provides
