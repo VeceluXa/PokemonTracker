@@ -17,26 +17,32 @@ class PokemonDetailsRepository @Inject constructor(
     private val context: Context
 ) : IPokemonDetailsRepository {
     // Mappers
-    val dbDetailsMapper = PokemonDetailsEntityMapper()
-    val apiDetailsMapper = PokemonDetailsDtoMapper(context)
+    private val dbDetailsMapper = PokemonDetailsEntityMapper()
+    private val apiDetailsMapper = PokemonDetailsDtoMapper(context)
 
     override suspend fun getDetails(pokemonItem: PokemonItem): PokemonDetails {
-        var details: PokemonDetails? = null
-
-        // Check if cached
-        val dbDetails = dao.getDetailsById(pokemonItem.id)
-        if (dbDetails != null)
-            details =  dbDetailsMapper.mapFromEntity(dbDetails)
-        else {
-            val apiDetails = detailsAPI.getPokemonDetails(pokemonItem.id)
-            if (apiDetails.body() != null) {
-                val detailsPair = apiDetailsMapper.mapFromEntity(apiDetails.body()!!)
-                dao.insertDetails(detailsPair.second)
-                details = detailsPair.first
-            }
-        }
+        val details: PokemonDetails = if (dao.isDetailsExist(pokemonItem.id))
+            dbGetDetails(pokemonItem.id)
+        else
+            apiGetDetails(pokemonItem.id)
 
         Log.d("Details", "getDetails: ${detailsAPI.getPokemonDetails(0).body().toString()}")
-        return details!!
+        return details
+    }
+
+    private suspend fun dbGetDetails(id: Int): PokemonDetails {
+        val dbDetails = dao.getDetailsById(id)
+        return dbDetailsMapper.mapFromEntity(dbDetails!!)
+    }
+
+    private suspend fun apiGetDetails(id: Int): PokemonDetails {
+        val apiDetails = detailsAPI.getPokemonDetails(id)
+        if (apiDetails.body() != null) {
+            val detailsPair = apiDetailsMapper.mapFromEntity(apiDetails.body()!!)
+            dao.insertDetails(detailsPair.second)
+            return detailsPair.first
+        }
+        // TODO handle api retrieval errors
+        throw(Exception("Error"))
     }
 }
