@@ -27,7 +27,8 @@ class PokemonPageAdapter(context: Context) :
     class PokemonViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val viewBinding: PokemonItemLayoutBinding by viewBinding()
         fun bind(pokemonItem: PokemonItem?) {
-            viewBinding.textPokemon.text = pokemonItem?.name ?: ""
+            val text = pokemonItem?.name?.replaceFirstChar { it.uppercaseChar() } ?: ""
+            viewBinding.textPokemon.text = text
         }
     }
 
