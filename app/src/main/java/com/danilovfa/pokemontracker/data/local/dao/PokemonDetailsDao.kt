@@ -12,6 +12,6 @@ interface PokemonDetailsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertDetails(detailsEntity: PokemonDetailsEntity)
 
-    @Query("SELECT EXISTS(SELECT * FROM details WHERE id = :id")
+    @Query("SELECT EXISTS(SELECT * FROM details WHERE id = :id)")
     fun isDetailsExist(id: Int) : Boolean
 }

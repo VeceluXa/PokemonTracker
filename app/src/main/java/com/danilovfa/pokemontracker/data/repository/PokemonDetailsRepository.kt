@@ -9,12 +9,13 @@ import com.danilovfa.pokemontracker.data.remote.PokemonDetailsAPI
 import com.danilovfa.pokemontracker.domain.model.PokemonDetails
 import com.danilovfa.pokemontracker.domain.model.PokemonItem
 import com.danilovfa.pokemontracker.domain.repository.IPokemonDetailsRepository
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
 class PokemonDetailsRepository @Inject constructor(
     private val detailsAPI: PokemonDetailsAPI,
     private val dao: PokemonDetailsDao,
-    private val context: Context
+    @ApplicationContext private val context: Context
 ) : IPokemonDetailsRepository {
     // Mappers
     private val dbDetailsMapper = PokemonDetailsEntityMapper()
