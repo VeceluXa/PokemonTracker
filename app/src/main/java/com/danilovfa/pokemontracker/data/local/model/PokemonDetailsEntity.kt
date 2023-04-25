@@ -3,7 +3,6 @@ package com.danilovfa.pokemontracker.data.local.model
 import android.graphics.Bitmap
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.danilovfa.pokemontracker.domain.model.PokemonDetails
 
 @Entity(tableName = "details")
 data class PokemonDetailsEntity(
