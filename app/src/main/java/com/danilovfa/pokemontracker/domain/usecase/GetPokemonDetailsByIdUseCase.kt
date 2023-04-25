@@ -5,7 +5,7 @@ import com.danilovfa.pokemontracker.domain.model.PokemonItem
 import com.danilovfa.pokemontracker.domain.repository.IPokemonDetailsRepository
 
 class GetPokemonDetailsByIdUseCase(private val pokemonDetailsRepository: IPokemonDetailsRepository) {
-    suspend fun execute(pokemonItem: PokemonItem) : PokemonDetails {
-        return pokemonDetailsRepository.getDetails(pokemonItem)
+    suspend fun execute(id: Int) : PokemonDetails {
+        return pokemonDetailsRepository.getDetails(id)
     }
 }

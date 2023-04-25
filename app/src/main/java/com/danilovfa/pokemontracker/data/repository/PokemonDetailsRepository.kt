@@ -21,11 +21,11 @@ class PokemonDetailsRepository @Inject constructor(
     private val dbDetailsMapper = PokemonDetailsEntityMapper()
     private val apiDetailsMapper = PokemonDetailsDtoMapper(context)
 
-    override suspend fun getDetails(pokemonItem: PokemonItem): PokemonDetails {
-        val details: PokemonDetails = if (dao.isDetailsExist(pokemonItem.id))
-            dbGetDetails(pokemonItem.id)
+    override suspend fun getDetails(id: Int): PokemonDetails {
+        val details: PokemonDetails = if (dao.isDetailsExist(id))
+            dbGetDetails(id)
         else
-            apiGetDetails(pokemonItem.id)
+            apiGetDetails(id)
 
         Log.d("Details", "getDetails: ${detailsAPI.getPokemonDetails(0).body().toString()}")
         return details
