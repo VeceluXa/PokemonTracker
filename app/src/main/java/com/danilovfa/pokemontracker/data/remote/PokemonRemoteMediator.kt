@@ -1,14 +1,14 @@
-package com.danilovfa.pokemontracker.data.paging
+package com.danilovfa.pokemontracker.data.remote
 
+import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import com.danilovfa.pokemontracker.data.local.dao.PokemonPageDao
+import com.danilovfa.pokemontracker.data.local.model.PokemonItemEntity
 import com.danilovfa.pokemontracker.data.mapper.PokemonItemEntityMapper
 import com.danilovfa.pokemontracker.data.mapper.PokemonPageDtoMapper
-import com.danilovfa.pokemontracker.data.remote.PokemonPageAPI
-import com.danilovfa.pokemontracker.domain.model.PokemonItem
 import com.danilovfa.pokemontracker.utils.Constants.Companion.PAGE_SIZE
 import retrofit2.HttpException
 import java.io.IOException
@@ -18,51 +18,48 @@ import javax.inject.Inject
 class PokemonRemoteMediator @Inject constructor(
     private val pokemonPageDao: PokemonPageDao,
     private val pokemonPageAPI: PokemonPageAPI
-): RemoteMediator<Int, PokemonItem>() {
+): RemoteMediator<Int, PokemonItemEntity>() {
     // Mappers
     private val pokemonPageDtoMapper = PokemonPageDtoMapper()
     private val pokemonItemEntityMapper = PokemonItemEntityMapper()
 
     override suspend fun load(
         loadType: LoadType,
-        state: PagingState<Int, PokemonItem>
+        state: PagingState<Int, PokemonItemEntity>
     ): MediatorResult {
-        return try {
-            val page = when(loadType) {
-                LoadType.REFRESH -> null
-                LoadType.PREPEND ->
-                    return MediatorResult.Success(endOfPaginationReached = true)
-                LoadType.APPEND -> {
-                    val lastItem = state.lastItemOrNull()
-                        ?: return MediatorResult.Success(endOfPaginationReached = true)
-                    lastItem.id
-                }
-            } ?: 0
+        val offset = getPageIndex(loadType, state)
+            ?: return MediatorResult.Success(endOfPaginationReached = true)
+        val limit = PAGE_SIZE
 
-            val response = pokemonPageAPI.getPokemonPage(PAGE_SIZE, page)
+        return try {
+            val response = pokemonPageAPI.getPokemonPage(PAGE_SIZE, offset)
             if (response.isSuccessful) {
                 val pokemons = pokemonPageDtoMapper.mapFromEntity(response.body()!!)
                 val entities = pokemons.map { pokemon -> pokemonItemEntityMapper.mapToEntity(pokemon) }
+                Log.d("Pager", "Mediator: ${entities}")
                 pokemonPageDao.insertAll(entities)
+                MediatorResult.Success(
+                    endOfPaginationReached = pokemons.size < limit
+                )
             } else {
-                return MediatorResult.Error(HttpException(response))
-            }
-
-            val endOfPagination = true
-            return if (response.isSuccessful) {
-                if (endOfPagination) {
-                     MediatorResult.Success(true)
-                } else {
-                     MediatorResult.Success(false)
-                }
-
-            } else {
-                 MediatorResult.Success(true)
+                MediatorResult.Error(HttpException(response))
             }
         } catch (e: IOException) {
             MediatorResult.Error(e)
         } catch (e: HttpException) {
             MediatorResult.Error(e)
         }
+    }
+
+    private fun getPageIndex(loadType: LoadType, state: PagingState<Int, PokemonItemEntity>): Int? {
+        return when(loadType) {
+            LoadType.REFRESH -> 0
+            LoadType.PREPEND -> null
+            LoadType.APPEND -> state.lastItemOrNull()?.id ?: 0
+        }
+    }
+
+    override suspend fun initialize(): InitializeAction {
+        return InitializeAction.SKIP_INITIAL_REFRESH
     }
 }
