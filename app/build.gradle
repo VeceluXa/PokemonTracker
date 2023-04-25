@@ -66,6 +66,7 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.15.1'
     implementation 'com.google.code.gson:gson:2.9.0'
     implementation 'com.github.kirich1409:viewbindingpropertydelegate-full:1.5.9'
+    implementation 'androidx.paging:paging-runtime-ktx:3.1.1'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
