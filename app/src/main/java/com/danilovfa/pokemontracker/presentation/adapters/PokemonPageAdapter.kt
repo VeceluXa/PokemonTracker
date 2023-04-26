@@ -15,6 +15,7 @@ import com.danilovfa.pokemontracker.R
 class PokemonPageAdapter(context: Context) :
     PagingDataAdapter<PokemonItem, PokemonPageAdapter.PokemonViewHolder>(PokemonDiffItemCallback) {
     private val layoutInflater = LayoutInflater.from(context)
+    private var onItemClickListener: OnItemClickListener? = null
 
     override fun onBindViewHolder(holder: PokemonViewHolder, position: Int) {
         holder.bind(getItem(position))
@@ -24,11 +25,15 @@ class PokemonPageAdapter(context: Context) :
         return PokemonViewHolder(layoutInflater.inflate(R.layout.pokemon_item_layout, parent, false))
     }
 
-    class PokemonViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class PokemonViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val viewBinding: PokemonItemLayoutBinding by viewBinding()
         fun bind(pokemonItem: PokemonItem?) {
             val text = pokemonItem?.name?.replaceFirstChar { it.uppercaseChar() } ?: ""
             viewBinding.textPokemon.text = text
+            itemView.setOnClickListener {
+                onItemClickListener?.onItemClick(pokemonItem)
+            }
+
         }
     }
 
@@ -39,5 +44,13 @@ class PokemonPageAdapter(context: Context) :
         override fun areContentsTheSame(oldItem: PokemonItem, newItem: PokemonItem): Boolean {
             return oldItem.id == newItem.id && oldItem.name == newItem.name
         }
+    }
+
+    fun setOnItemClickLister(listener: OnItemClickListener) {
+        onItemClickListener = listener
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(pokemonItem: PokemonItem?)
     }
 }

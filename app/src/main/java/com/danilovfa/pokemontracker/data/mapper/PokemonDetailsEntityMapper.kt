@@ -6,21 +6,23 @@ import com.danilovfa.pokemontracker.domain.model.PokemonDetails
 class PokemonDetailsEntityMapper: Mapper<PokemonDetailsEntity, PokemonDetails> {
     override fun mapFromEntity(entity: PokemonDetailsEntity): PokemonDetails {
         return PokemonDetails(
+            id = entity.id,
             name = entity.name,
             sprite = entity.sprite,
             types = entity.types,
-            weightInKg = entity.weightInKg,
-            heightInCm = entity.heightInCm
+            weightInHg = entity.weightInHg,
+            heightInDm = entity.heightInDm
         )
     }
 
     override fun mapToEntity(domain: PokemonDetails): PokemonDetailsEntity {
         return PokemonDetailsEntity(
+            id = domain.id,
             name = domain.name,
             sprite = domain.sprite,
             types = domain.types,
-            weightInKg = domain.weightInKg,
-            heightInCm = domain.heightInCm
+            weightInHg = domain.weightInHg,
+            heightInDm = domain.heightInDm
         )
     }
 

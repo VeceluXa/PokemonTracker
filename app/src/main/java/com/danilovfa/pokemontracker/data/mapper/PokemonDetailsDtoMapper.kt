@@ -23,18 +23,20 @@ class PokemonDetailsDtoMapper (var context: Context) {
 
         return Pair(
             PokemonDetails(
+                id = entity.id,
                 name = entity.name,
                 types = entity.types.map { it.type.name },
                 sprite = bitmap,
-                weightInKg = entity.weight,
-                heightInCm = entity.height
+                weightInHg = entity.weight,
+                heightInDm = entity.height
             ),
             PokemonDetailsEntity(
+                id = entity.id,
                 name = entity.name,
                 types = entity.types.map { it.type.name },
                 sprite = bitmap,
-                weightInKg = entity.weight,
-                heightInCm = entity.height
+                weightInHg = entity.weight,
+                heightInDm = entity.height
             )
         )
 
