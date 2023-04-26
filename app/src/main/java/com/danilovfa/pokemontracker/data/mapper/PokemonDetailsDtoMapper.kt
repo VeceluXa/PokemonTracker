@@ -23,6 +23,7 @@ class PokemonDetailsDtoMapper (var context: Context) {
 
         return Pair(
             PokemonDetails(
+                id = entity.id,
                 name = entity.name,
                 types = entity.types.map { it.type.name },
                 sprite = bitmap,
@@ -30,6 +31,7 @@ class PokemonDetailsDtoMapper (var context: Context) {
                 heightInDm = entity.height
             ),
             PokemonDetailsEntity(
+                id = entity.id,
                 name = entity.name,
                 types = entity.types.map { it.type.name },
                 sprite = bitmap,

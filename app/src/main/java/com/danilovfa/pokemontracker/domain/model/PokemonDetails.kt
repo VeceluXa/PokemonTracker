@@ -3,6 +3,7 @@ package com.danilovfa.pokemontracker.domain.model
 import android.graphics.Bitmap
 
 data class PokemonDetails(
+    val id: Int,
     val name: String,
     val sprite: Bitmap,
     val types: List<String>,

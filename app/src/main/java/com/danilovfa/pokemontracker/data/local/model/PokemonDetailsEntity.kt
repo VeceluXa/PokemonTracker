@@ -11,6 +11,6 @@ data class PokemonDetailsEntity(
     val types: List<String>,
     val weightInHg: Int,
     val heightInDm: Int,
-    @PrimaryKey(autoGenerate = true)
-    val id: Int = 0
+    @PrimaryKey(autoGenerate = false)
+    val id: Int
 )
