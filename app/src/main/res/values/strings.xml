@@ -2,4 +2,6 @@
     <string name="app_name">Pokemon Tracker</string>
     <string name="page_label">Pokemons</string>
     <string name="pokemonNameDummy">Bulbasaur</string>
+    <string name="weight">%1$d kg</string>
+    <string name="height">%1$d cm</string>
 </resources>
