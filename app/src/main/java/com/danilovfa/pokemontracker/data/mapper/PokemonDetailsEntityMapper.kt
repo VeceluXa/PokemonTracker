@@ -10,7 +10,7 @@ class PokemonDetailsEntityMapper: Mapper<PokemonDetailsEntity, PokemonDetails> {
             sprite = entity.sprite,
             types = entity.types,
             weightInHg = entity.weightInHg,
-            heightInCm = entity.heightInCm
+            heightInDm = entity.heightInDm
         )
     }
 
@@ -20,7 +20,7 @@ class PokemonDetailsEntityMapper: Mapper<PokemonDetailsEntity, PokemonDetails> {
             sprite = domain.sprite,
             types = domain.types,
             weightInHg = domain.weightInHg,
-            heightInCm = domain.heightInCm
+            heightInDm = domain.heightInDm
         )
     }
 

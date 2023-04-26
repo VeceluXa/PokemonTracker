@@ -7,5 +7,5 @@ data class PokemonDetails(
     val sprite: Bitmap,
     val types: List<String>,
     val weightInHg: Int,
-    val heightInCm: Int
+    val heightInDm: Int
 )
