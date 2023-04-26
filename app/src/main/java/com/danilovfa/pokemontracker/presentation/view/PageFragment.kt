@@ -24,6 +24,7 @@ import com.danilovfa.pokemontracker.domain.usecase.GetPokemonByPageUseCase
 import com.danilovfa.pokemontracker.presentation.adapters.PokemonLoaderAdapter
 import com.danilovfa.pokemontracker.presentation.adapters.PokemonPageAdapter
 import com.danilovfa.pokemontracker.presentation.viewmodel.PageViewModel
+import com.danilovfa.pokemontracker.presentation.viewmodel.PageViewModel_Factory
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.*
@@ -32,16 +33,25 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class PageFragment : Fragment(), PokemonPageAdapter.OnItemClickListener {
 
-    private val binding: FragmentPageBinding by viewBinding(createMethod = CreateMethod.INFLATE)
+    /**
+     * I didn't use viewbinding delegate here because app was crashing
+     * when user clicked after closing details fragment.
+     * Here is the code for it:
+     * private val binding: FragmentPageBinding by viewBinding(createMethod = CreateMethod.INFLATE)
+     */
+    private var _binding: FragmentPageBinding? = null
+    private val binding get() = _binding!!
+
     private val viewModel: PageViewModel by viewModels()
-    private val adapter by lazy(LazyThreadSafetyMode.NONE) {
-        PokemonPageAdapter(requireActivity())
+    private val adapter: PokemonPageAdapter by lazy(LazyThreadSafetyMode.NONE) {
+        PokemonPageAdapter(requireContext())
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        _binding = FragmentPageBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
