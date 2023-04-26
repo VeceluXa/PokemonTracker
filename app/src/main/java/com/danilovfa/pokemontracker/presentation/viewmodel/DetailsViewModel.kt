@@ -22,10 +22,20 @@ class DetailsViewModel @Inject constructor(
     private val _details = MutableLiveData<PokemonDetails>()
     val details: LiveData<PokemonDetails> = _details
 
+    private var _error = MutableLiveData<String>()
+    val error: LiveData<String> = _error
+
     fun loadDetails() {
         CoroutineScope(Dispatchers.IO).launch {
-            val details = getPokemonDetailsByIdUseCase.execute(id!!)
-            _details.postValue(details)
+            var details: PokemonDetails? = null
+            try {
+                details = getPokemonDetailsByIdUseCase.execute(id!!)
+            } catch (e: Exception) {
+                _error.postValue(e.message)
+            }
+            if (details != null) {
+                _details.postValue(details!!)
+            }
         }
     }
 }

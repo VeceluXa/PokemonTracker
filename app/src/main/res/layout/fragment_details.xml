@@ -23,6 +23,24 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
 
+        <TextView
+            android:id="@+id/detailsErrorMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="56dp"
+            android:padding="4dp"
+            android:textAllCaps="true"
+            android:textAppearance="?textAppearanceSubtitle1"
+            android:textColor="?colorError"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Unknown Error"
+            android:visibility="gone"
+            tools:visibility="gone"/>
+
         <ProgressBar
             android:id="@+id/progressBarDetails"
             style="?android:attr/progressBarStyle"

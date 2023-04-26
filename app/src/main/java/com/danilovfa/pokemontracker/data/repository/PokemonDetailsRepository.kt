@@ -10,6 +10,7 @@ import com.danilovfa.pokemontracker.domain.model.PokemonDetails
 import com.danilovfa.pokemontracker.domain.model.PokemonItem
 import com.danilovfa.pokemontracker.domain.repository.IPokemonDetailsRepository
 import dagger.hilt.android.qualifiers.ApplicationContext
+import retrofit2.HttpException
 import javax.inject.Inject
 
 class PokemonDetailsRepository @Inject constructor(
@@ -44,6 +45,6 @@ class PokemonDetailsRepository @Inject constructor(
             return detailsPair.first
         }
         // TODO handle api retrieval errors
-        throw(Exception("Error"))
+        throw(HttpException(apiDetails))
     }
 }

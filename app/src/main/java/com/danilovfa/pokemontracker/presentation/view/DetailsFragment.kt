@@ -38,6 +38,10 @@ class DetailsFragment : Fragment() {
         viewModel.details.observe(viewLifecycleOwner) { details ->
             setDetails(details)
         }
+
+        viewModel.error.observe(viewLifecycleOwner) { error ->
+            setError(error)
+        }
         Log.d("Details", "onViewCreated: $id")
     }
 
@@ -77,5 +81,13 @@ class DetailsFragment : Fragment() {
         textView.text = type.replaceFirstChar { it.uppercaseChar() }
 
         binding.typesLayout.addView(layout)
+    }
+
+    private fun setError(error: String) {
+        with (binding) {
+            detailsErrorMessage.visibility = View.VISIBLE
+            progressBarDetails.visibility = View.GONE
+            detailsErrorMessage.text = error
+        }
     }
 }
