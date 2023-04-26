@@ -9,7 +9,7 @@ class PokemonDetailsEntityMapper: Mapper<PokemonDetailsEntity, PokemonDetails> {
             name = entity.name,
             sprite = entity.sprite,
             types = entity.types,
-            weightInKg = entity.weightInKg,
+            weightInHg = entity.weightInHg,
             heightInCm = entity.heightInCm
         )
     }
@@ -19,7 +19,7 @@ class PokemonDetailsEntityMapper: Mapper<PokemonDetailsEntity, PokemonDetails> {
             name = domain.name,
             sprite = domain.sprite,
             types = domain.types,
-            weightInKg = domain.weightInKg,
+            weightInHg = domain.weightInHg,
             heightInCm = domain.heightInCm
         )
     }

@@ -9,7 +9,7 @@ data class PokemonDetailsEntity(
     val name: String,
     val sprite: Bitmap,
     val types: List<String>,
-    val weightInKg: Int,
+    val weightInHg: Int,
     val heightInCm: Int,
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0
