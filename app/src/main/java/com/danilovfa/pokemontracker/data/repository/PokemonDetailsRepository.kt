@@ -27,7 +27,7 @@ class PokemonDetailsRepository @Inject constructor(
         else
             apiGetDetails(id)
 
-        Log.d("Details", "getDetails: ${detailsAPI.getPokemonDetails(0).body().toString()}")
+        Log.d("Details", "getDetails: $details")
         return details
     }
 

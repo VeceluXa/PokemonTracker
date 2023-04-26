@@ -19,6 +19,7 @@ import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.danilovfa.pokemontracker.R
 import com.danilovfa.pokemontracker.databinding.FragmentPageBinding
+import com.danilovfa.pokemontracker.domain.model.PokemonItem
 import com.danilovfa.pokemontracker.domain.usecase.GetPokemonByPageUseCase
 import com.danilovfa.pokemontracker.presentation.adapters.PokemonLoaderAdapter
 import com.danilovfa.pokemontracker.presentation.adapters.PokemonPageAdapter
@@ -65,8 +66,9 @@ class PageFragment : Fragment(), PokemonPageAdapter.OnItemClickListener {
         adapter.setOnItemClickLister(this)
     }
 
-    override fun onItemClick(itemId: Int) {
-        val bundle = bundleOf("id" to itemId)
+    override fun onItemClick(pokemonItem: PokemonItem?) {
+        Log.d("Details", "onItemClick: ${pokemonItem?.id}")
+        val bundle = bundleOf("id" to pokemonItem?.id)
         findNavController().navigate(R.id.action_PageFragment_to_DetailsFragment, bundle)
     }
 

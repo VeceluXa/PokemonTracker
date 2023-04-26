@@ -31,7 +31,7 @@ class PokemonPageAdapter(context: Context) :
             val text = pokemonItem?.name?.replaceFirstChar { it.uppercaseChar() } ?: ""
             viewBinding.textPokemon.text = text
             itemView.setOnClickListener {
-                onItemClickListener?.onItemClick(pokemonItem?.id ?: 0)
+                onItemClickListener?.onItemClick(pokemonItem)
             }
 
         }
@@ -51,6 +51,6 @@ class PokemonPageAdapter(context: Context) :
     }
 
     interface OnItemClickListener {
-        fun onItemClick(itemId: Int)
+        fun onItemClick(pokemonItem: PokemonItem?)
     }
 }
