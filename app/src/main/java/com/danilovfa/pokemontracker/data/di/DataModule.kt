@@ -2,14 +2,14 @@ package com.danilovfa.pokemontracker.data.di
 
 import android.app.Application
 import android.content.Context
+import android.net.ConnectivityManager
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.room.Room
 import com.danilovfa.pokemontracker.data.local.dao.PokemonDetailsDao
 import com.danilovfa.pokemontracker.data.local.dao.PokemonPageDao
-import com.danilovfa.pokemontracker.data.local.database.PokemonDetailsDatabase
-import com.danilovfa.pokemontracker.data.local.database.PokemonPageDatabase
+import com.danilovfa.pokemontracker.data.local.PokemonDatabase
 import com.danilovfa.pokemontracker.data.local.model.PokemonItemEntity
 import com.danilovfa.pokemontracker.data.remote.PokemonRemoteMediator
 import com.danilovfa.pokemontracker.data.remote.PokemonDetailsAPI
@@ -28,6 +28,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Qualifier
 import javax.inject.Singleton
 
 @OptIn(ExperimentalPagingApi::class)
@@ -46,40 +47,36 @@ class DataModule {
 
     @Provides
     @Singleton
-    fun providePokemonPageRepository(pager: Pager<Int, PokemonItemEntity>): IPokemonPageRepository {
-        return PokemonPageRepository(pager)
+    fun providePokemonPageRepository(
+        pagerOnline: Pager<Int, PokemonItemEntity>,
+        pagerOffline: Pager<Int, PokemonItemEntity>,
+        @ApplicationContext context: Context
+    ): IPokemonPageRepository {
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        return PokemonPageRepository(pagerOnline, pagerOffline, connectivityManager)
     }
+
 
     @Provides
     @Singleton
-    fun providePokemonPageDatabase(app: Application) : PokemonPageDatabase {
+    fun providePokemonDetailsDatabase(app: Application) : PokemonDatabase {
         return Room.databaseBuilder(
             app,
-            PokemonPageDatabase::class.java,
-            PokemonPageDatabase.DATABASE_NAME
+            PokemonDatabase::class.java,
+            PokemonDatabase.DATABASE_NAME
         ).build()
     }
 
     @Provides
     @Singleton
-    fun providePokemonPageDao(db: PokemonPageDatabase) : PokemonPageDao {
-        return db.pokemonPageDao
-    }
-
-    @Provides
-    @Singleton
-    fun providePokemonDetailsDatabase(app: Application) : PokemonDetailsDatabase {
-        return Room.databaseBuilder(
-            app,
-            PokemonDetailsDatabase::class.java,
-            PokemonDetailsDatabase.DATABASE_NAME
-        ).build()
-    }
-
-    @Provides
-    @Singleton
-    fun providePokemonDetailsDao(db: PokemonDetailsDatabase) : PokemonDetailsDao {
+    fun providePokemonDetailsDao(db: PokemonDatabase) : PokemonDetailsDao {
         return db.pokemonDetailsDao
+    }
+
+    @Provides
+    @Singleton
+    fun providePokemonPageDao(db: PokemonDatabase) : PokemonPageDao {
+        return db.pokemonPageDao
     }
 
     @Provides
@@ -97,9 +94,13 @@ class DataModule {
     @Singleton
     fun providePokemonPageAPI(retrofit: Retrofit): PokemonPageAPI = retrofit.create(PokemonPageAPI::class.java)
 
+    @Qualifier
+    @Retention(AnnotationRetention.BINARY)
+    annotation class PagerOnline
     @Provides
     @Singleton
-    fun providePokemonPager(dao: PokemonPageDao, api: PokemonPageAPI): Pager<Int, PokemonItemEntity> {
+    @PagerOnline
+    fun providePokemonPagerOnline(dao: PokemonPageDao, api: PokemonPageAPI): Pager<Int, PokemonItemEntity> {
         return Pager(
             config = PagingConfig(
                 pageSize = PAGE_SIZE,
@@ -111,7 +112,29 @@ class DataModule {
                 pokemonPageDao = dao
             )
         ) {
-            dao.pagingSource()
+            dao.pagingSourceOnline()
         }
+    }
+
+    @Qualifier
+    @Retention(AnnotationRetention.BINARY)
+    annotation class PagerOffline
+    @Provides
+    @Singleton
+    @PagerOffline
+    fun providePokemonPagerOffline(dao: PokemonPageDao, api: PokemonPageAPI): Pager<Int, PokemonItemEntity> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = PAGE_SIZE,
+            )
+        ) {
+            dao.pagingSourceOffline()
+        }
+    }
+
+    @Provides
+    @Singleton
+    fun provideConnectivityManager(@ApplicationContext context: Context): ConnectivityManager {
+        return context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     }
 }
