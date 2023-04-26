@@ -12,4 +12,4 @@ App uses [pokeapi](https://pokeapi.co) to retrieve list of pokemons using pagina
 - Jetpack Navigation
 
 ## Usage
-[Recording](./assets/recording.gif)
+![](./assets/recording.gif)
