@@ -134,7 +134,7 @@ class DataModule {
 
     @Provides
     @Singleton
-    fun provideConnectivityManager(@ApplicationContext context: Context): ConnectivityManager {
-        return context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    fun provideConnectivityManager(@ApplicationContext context: Context): ConnectivityManager? {
+        return context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
     }
 }
